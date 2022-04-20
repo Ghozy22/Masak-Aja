@@ -37,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Login',
+      title: 'Masak Aja',
       home: Scaffold(
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
@@ -86,9 +86,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         _loginLabel(),
                         const SizedBox(height: 70,),
                         _labelTextInpit("email", "nanan@gmail.com", false),
-                        const SizedBox(height: 50,),
+                        const SizedBox(height: 40,),
                         _labelTextInpit("password", "password", true),
-                        const SizedBox(height: 90,),
+                        const SizedBox(height: 60,),
                         Container(
                           width: double.infinity,
                               height: 60,
@@ -109,11 +109,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                 )
                               ),)),
                         ),
-                        const SizedBox(height: 90,),
+                        const SizedBox(height: 40,),
                         _signupLabel("no akun", const Color(0xff909090) ),
                         const SizedBox(height: 10,),
-                        _signupLabel("Daftar", const Color(0xff909090) ),
-                        const SizedBox(height: 35,),
+                        _signupLabel("Daftar", const Color(0xff909090) )
                       ],
                     ),
                   ),
@@ -142,7 +141,7 @@ Widget _signupLabel(String label, Color textColor){
 Widget _loginBtn(){
   return Container(
     width: double.infinity,
-    height: 60,
+    height: 40,
     decoration:const BoxDecoration(
       color: Color(0xff008fff),
       borderRadius: BorderRadius.all(Radius.circular(10))
@@ -153,9 +152,8 @@ Widget _loginBtn(){
     style: GoogleFonts.josefinSans(
       textStyle: const TextStyle(
         color: Colors.white,
-        fontWeight: FontWeight.w800,
+        fontWeight: FontWeight.w500,
         fontSize: 24,
-
       )
     ),)),
   );

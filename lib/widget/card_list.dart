@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:masakaja/detail_screen.dart';
 import 'package:masakaja/models/masakan.dart';
 
 class cardList extends StatelessWidget {
@@ -8,7 +9,11 @@ class cardList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return InkWell(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => detailScreen(),));
+      },
+      child: Column(
       children: [
         Row(
           children: [
@@ -49,6 +54,7 @@ class cardList extends StatelessWidget {
           ],
         )
       ],
-    );
+    ),
+    );  
   }
 }
