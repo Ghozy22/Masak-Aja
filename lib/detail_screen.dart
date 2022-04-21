@@ -12,18 +12,6 @@ class detailScreen extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             fit: BoxFit.cover,
             ),
-            Padding(padding: EdgeInsets.all(20),
-              child: Row(
-                children: [
-                  InkWell(
-                    onTap: (){
-                      Navigator.of(context).pop();
-                    },
-                    child: Image.asset('assets/btn_back.png', width: 40,),
-                  ),
-                ],
-              ),
-            ),
             ListView(
               shrinkWrap: true,
               children: [
@@ -58,12 +46,14 @@ class detailScreen extends StatelessWidget {
                           SizedBox(height: 20,),
                           Container(
                             width: MediaQuery.of(context).size.width,
-                            child: RaisedButton(onPressed: (){},
+                            child: RaisedButton(onPressed: (){
+                              Navigator.pop(context);
+                            },
                              padding: EdgeInsets.only(top: 15, bottom: 15),
                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(13)),
                              elevation: 0,
                              color: Color.fromARGB(255, 255, 196, 0),
-                             child: Text('Whsilist', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 255, 255, 255)),),
+                             child: Text('Kembali', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 255, 255, 255)),),
                              ),
                           )
                         ],
