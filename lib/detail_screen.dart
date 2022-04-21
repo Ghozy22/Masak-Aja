@@ -21,7 +21,6 @@ class detailScreen extends StatelessWidget {
                     },
                     child: Image.asset('assets/btn_back.png', width: 40,),
                   ),
-                  
                 ],
               ),
             ),

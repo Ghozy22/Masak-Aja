@@ -3,44 +3,14 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:masakaja/home_screen.dart';
-import 'package:masakaja/register.dart';
+import 'package:masakaja/main.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+class Register extends StatelessWidget {
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Masak Aja',
-      home: Scaffold(
-        backgroundColor: Colors.white,
+    return Scaffold(
+      backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: SizedBox(
             child: Stack(
@@ -82,13 +52,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Column(
                       children: [
                         const SizedBox(height: 50,),
-                        _logo(),
-                        const SizedBox(height: 50,),
                         _loginLabel(),
                         const SizedBox(height: 70,),
-                        _labelTextInpit("Email", "Email Anda", false),
+                        _labelTextInpit("email", "Email Anda", false),
                         const SizedBox(height: 40,),
-                        _labelTextInpit("Password", "Password Anda", true),
+                        _labelTextInpit("password", "Password Anda", true),
+                        const SizedBox(height: 40,),
+                         _labelTextInpit("nama", "Nama Anda", false),
+                        const SizedBox(height: 40,),
+                        _labelTextInpit("No Telpon", "No Telpon Anda", false),
                         const SizedBox(height: 60,),
                         Container(
                           width: double.infinity,
@@ -98,9 +70,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                 borderRadius: BorderRadius.all(Radius.circular(10))
                               ),
                               child: TextButton(onPressed: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => homeScreen(),));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => const MyHomePage(title: 'login'),));
                               }, 
-                              child: Text("login",
+                              child: Text("Register",
                               style: GoogleFonts.josefinSans(
                                 textStyle: const TextStyle(
                                   color: Colors.white,
@@ -111,13 +83,14 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),)),
                         ),
                         const SizedBox(height: 40,),
-                        _signupLabel("Tidak Memiliki Akun?", const Color(0xff909090) ),
+                        _signupLabel("Sudah Memiliki Akun?", const Color(0xff909090) ),
                         const SizedBox(height: 10,),
                         InkWell(
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => Register(),));
-                        },
-                        child: _signupLabel("Daftar", const Color(0xff909090) ))
+                          onTap: (){
+                            Navigator.pop(context);
+                          },
+                          child: _signupLabel("Login", const Color(0xff909090) )),
+                        const SizedBox(height: 10,),
                       ],
                     ),
                   ),
@@ -126,7 +99,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
         ),
-      ),
     );
   }
 }
@@ -153,7 +125,7 @@ Widget _loginBtn(){
     ),
     child: TextButton(onPressed: (){
     }, 
-    child: Text("login",
+    child: Text("Register",
     style: GoogleFonts.josefinSans(
       textStyle: const TextStyle(
         color: Colors.white,
@@ -209,7 +181,7 @@ Widget _logo(){
 
 Widget _loginLabel(){
   return Center(
-    child: Text("Login", style: GoogleFonts.josefinSans(
+    child: Text("Register", style: GoogleFonts.josefinSans(
       textStyle: const TextStyle(color: Color(0xff164276),
       fontWeight: FontWeight.w900,
       fontSize: 34
