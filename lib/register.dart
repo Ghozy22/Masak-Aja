@@ -18,7 +18,7 @@ class Register extends StatelessWidget {
   Future register() async {
 
     var response = await http.post(
-    Uri.parse("http://172.17.160.81/MasakAja/Register.php"),
+    Uri.parse("http://172.17.223.129/MasakAja/Register.php"),
     body: {
       "email": email.text,
       "password": pass.text,

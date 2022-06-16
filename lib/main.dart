@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future masuk() async {
     var response = await http.post(
-    Uri.parse("http://172.17.160.81/MasakAja/Login.php"),
+    Uri.parse("http://172.17.223.129/MasakAja/Login.php"),
     body: {
       "email": email.text,
       "password": pass.text,
