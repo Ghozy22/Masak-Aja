@@ -1,9 +1,12 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:masakaja/home_screen.dart';
 import 'package:masakaja/register.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(const MyApp());
@@ -34,6 +37,43 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  TextEditingController email = TextEditingController();
+  TextEditingController pass = TextEditingController();
+
+  Future masuk() async {
+    var response = await http.post(
+    Uri.parse("http://172.17.160.81/MasakAja/Login.php"),
+    body: {
+      "email": email.text,
+      "password": pass.text,
+    });
+
+    var data = json.decode(response.body);
+
+    if(data == "Berhasil"){
+        Fluttertoast.showToast(
+        msg: "Login Berhasil",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0);
+        Navigator.push(context, MaterialPageRoute(builder: (context) => home(),));
+    } else {
+       Fluttertoast.showToast(
+        msg: "Username Atau Password Salah",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -86,9 +126,71 @@ class _MyHomePageState extends State<MyHomePage> {
                         const SizedBox(height: 50,),
                         _loginLabel(),
                         const SizedBox(height: 70,),
-                        _labelTextInpit("Email", "Email Anda", false),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Email', style: GoogleFonts.josefinSans(
+                                textStyle: const TextStyle(
+                                  color: Color(0xff8fa1b6),
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 20,
+                                )
+                              ),
+                            ),
+                            TextField(
+                              controller: email,
+                              obscureText: false,
+                              cursorColor: Colors.red,
+                              decoration: InputDecoration(
+                                hintText: "Email",
+                                hintStyle: GoogleFonts.josefinSans(
+                                  textStyle: const TextStyle(
+                                    color: Color(0xffc5d2e1),
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 20,
+                                  )
+                                ),
+                                enabledBorder: const UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Color(0xffdfe8f3))
+                                )
+                              ),
+                            )
+                          ],
+                        ),
                         const SizedBox(height: 40,),
-                        _labelTextInpit("Password", "Password Anda", true),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Password', style: GoogleFonts.josefinSans(
+                                textStyle: const TextStyle(
+                                  color: Color(0xff8fa1b6),
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 20,
+                                )
+                              ),
+                            ),
+                            TextField(
+                              controller: pass,
+                              obscureText: true,
+                              cursorColor: Colors.red,
+                              decoration: InputDecoration(
+                                hintText: "Password",
+                                hintStyle: GoogleFonts.josefinSans(
+                                  textStyle: const TextStyle(
+                                    color: Color(0xffc5d2e1),
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 20,
+                                  )
+                                ),
+                                enabledBorder: const UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Color(0xffdfe8f3))
+                                )
+                              ),
+                            )
+                          ],
+                        ),
                         const SizedBox(height: 60,),
                         Container(
                           width: double.infinity,
@@ -98,7 +200,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 borderRadius: BorderRadius.all(Radius.circular(10))
                               ),
                               child: TextButton(onPressed: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => homeScreen(),));
+                                masuk();
+                                
                               }, 
                               child: Text("login",
                               style: GoogleFonts.josefinSans(

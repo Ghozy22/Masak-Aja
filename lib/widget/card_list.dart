@@ -10,6 +10,8 @@ class cardList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+
+
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) => detailScreen(),));
       },
@@ -49,6 +51,7 @@ class cardList extends StatelessWidget {
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                         color: Colors.grey)),
+                
               ],
             ),
           ],

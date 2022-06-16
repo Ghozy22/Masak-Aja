@@ -1,11 +1,57 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:masakaja/home_screen.dart';
 import 'package:masakaja/main.dart';
+import 'package:http/http.dart' as http;
 
 class Register extends StatelessWidget {
+
+  TextEditingController email = TextEditingController();
+  TextEditingController pass = TextEditingController();
+  TextEditingController nama = TextEditingController();
+  TextEditingController telpon = TextEditingController();
+
+
+  Future register() async {
+
+    var response = await http.post(
+    Uri.parse("http://172.17.160.81/MasakAja/Register.php"),
+    body: {
+      "email": email.text,
+      "password": pass.text,
+      "nama": nama.text,
+      "no_telpon": telpon.text,
+    });
+
+    var data = json.decode(response.body);
+
+    if(data == "Error"){
+      Fluttertoast.showToast(
+        msg: "User Telah Terdaftar",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
+    } else {
+      Fluttertoast.showToast(
+        msg: "Pendaftaran Berhasil!",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
+    }
+
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -54,13 +100,137 @@ class Register extends StatelessWidget {
                         const SizedBox(height: 50,),
                         _loginLabel(),
                         const SizedBox(height: 70,),
-                        _labelTextInpit("email", "Email Anda", false),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Email', style: GoogleFonts.josefinSans(
+                                textStyle: const TextStyle(
+                                  color: Color(0xff8fa1b6),
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 20,
+                                )
+                              ),
+                            ),
+                            TextField(
+                              controller: email,
+                              obscureText: false,
+                              cursorColor: Colors.red,
+                              decoration: InputDecoration(
+                                hintText: "Email Anda",
+                                hintStyle: GoogleFonts.josefinSans(
+                                  textStyle: const TextStyle(
+                                    color: Color(0xffc5d2e1),
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 20,
+                                  )
+                                ),
+                                enabledBorder: const UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Color(0xffdfe8f3))
+                                )
+                              ),
+                            )
+                          ],
+                        ),
                         const SizedBox(height: 40,),
-                        _labelTextInpit("password", "Password Anda", true),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Password', style: GoogleFonts.josefinSans(
+                                textStyle: const TextStyle(
+                                  color: Color(0xff8fa1b6),
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 20,
+                                )
+                              ),
+                            ),
+                            TextField(
+                              controller: pass,
+                              obscureText: true,
+                              cursorColor: Colors.red,
+                              decoration: InputDecoration(
+                                hintText: "Password Anda",
+                                hintStyle: GoogleFonts.josefinSans(
+                                  textStyle: const TextStyle(
+                                    color: Color(0xffc5d2e1),
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 20,
+                                  )
+                                ),
+                                enabledBorder: const UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Color(0xffdfe8f3))
+                                )
+                              ),
+                            )
+                          ],
+                        ),
                         const SizedBox(height: 40,),
-                         _labelTextInpit("nama", "Nama Anda", false),
+                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Nama', style: GoogleFonts.josefinSans(
+                                textStyle: const TextStyle(
+                                  color: Color(0xff8fa1b6),
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 20,
+                                )
+                              ),
+                            ),
+                            TextField(
+                              controller: nama,
+                              obscureText: false,
+                              cursorColor: Colors.red,
+                              decoration: InputDecoration(
+                                hintText: "Nama Anda",
+                                hintStyle: GoogleFonts.josefinSans(
+                                  textStyle: const TextStyle(
+                                    color: Color(0xffc5d2e1),
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 20,
+                                  )
+                                ),
+                                enabledBorder: const UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Color(0xffdfe8f3))
+                                )
+                              ),
+                            )
+                          ],
+                        ),
                         const SizedBox(height: 40,),
-                        _labelTextInpit("No Telpon", "No Telpon Anda", false),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'No Telpon', style: GoogleFonts.josefinSans(
+                                textStyle: const TextStyle(
+                                  color: Color(0xff8fa1b6),
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 20,
+                                )
+                              ),
+                            ),
+                            TextField(
+                              controller: telpon,
+                              obscureText: false,
+                              cursorColor: Colors.red,
+                              decoration: InputDecoration(
+                                hintText: "No Telpon Anda",
+                                hintStyle: GoogleFonts.josefinSans(
+                                  textStyle: const TextStyle(
+                                    color: Color(0xffc5d2e1),
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 20,
+                                  )
+                                ),
+                                enabledBorder: const UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Color(0xffdfe8f3))
+                                )
+                              ),
+                            )
+                          ],
+                        ),
                         const SizedBox(height: 60,),
                         Container(
                           width: double.infinity,
@@ -70,6 +240,7 @@ class Register extends StatelessWidget {
                                 borderRadius: BorderRadius.all(Radius.circular(10))
                               ),
                               child: TextButton(onPressed: (){
+                                register();
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => const MyHomePage(title: 'login'),));
                               }, 
                               child: Text("Register",
@@ -115,26 +286,6 @@ Widget _signupLabel(String label, Color textColor){
     );
 }
 
-Widget _loginBtn(){
-  return Container(
-    width: double.infinity,
-    height: 40,
-    decoration:const BoxDecoration(
-      color: Color(0xff008fff),
-      borderRadius: BorderRadius.all(Radius.circular(10))
-    ),
-    child: TextButton(onPressed: (){
-    }, 
-    child: Text("Register",
-    style: GoogleFonts.josefinSans(
-      textStyle: const TextStyle(
-        color: Colors.white,
-        fontWeight: FontWeight.w500,
-        fontSize: 24,
-      )
-    ),)),
-  );
-}
 
 Widget _labelTextInpit(String label, String hint, bool isPassword){
   return Column(

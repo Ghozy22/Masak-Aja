@@ -1,5 +1,5 @@
 class Masakan{
-  int id;
+  String id;
   String judul;
   String bahan;
   String isi;
